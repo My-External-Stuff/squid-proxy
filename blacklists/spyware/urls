@@ -5,3 +5,5 @@ github.com/PostHog/
 *.*/cdn-cgi/challenge-platform/
 www.haeri.ms.kr/.signin.ebay.com
 www.web2.formatsoft.net/~ftp/postcard.gif.exe
+dubox.com/api/analytics
+dyncdn.me/static/20/img/loading_flat.gif
