@@ -1,1 +1,3 @@
 https://github.com/PostHog/*
+*.*/cdn-cgi/images/trace/
+*.*/cdn-cgi/challenge-platform/
