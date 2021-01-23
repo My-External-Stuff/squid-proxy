@@ -1,0 +1,60 @@
+name: Update squid blacklist
+
+# Controls when the action will run. 
+on:
+  push:
+    branches:
+      - "master"
+  workflow_dispatch:
+
+env:
+  GIT_NAME: "${{ secrets.GIT_NAME }}"
+  GIT_EMAIL: "${{ secrets.GIT_EMAIL }}"
+  GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+jobs:
+  scheduler:
+    name: Trigger action
+    runs-on: "${{ matrix.os }}"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python_version:
+          - "3.9.1"
+        os:
+          - ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main #Obviously yet another american...
+        name: Clone repository
+        with:
+          token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Pack the Blacklists
+        run: |
+          python3.9 -m zipfile -c "${{ github.workspace }}/blacklists.tar.gz" \
+          "${{ github.workspace }}/blacklists/"
+
+      - name: Greeting
+        run: |
+          echo "I'm done..."
+          echo "Please wipe my..."
+          echo -e "\n\n\n\n\n"
+          sleep 1
+          echo "....cache"
+          echo "What did you think I ment your pervert :smiley:"
+
+      - name: Commit changes
+        run: |
+          tag=$(date +'day: %j of year %Y %H:%M:%S')
+          git config --local user.name "$GIT_NAME"
+          git config --local user.email "$GIT_EMAIL"
+          git commit -m "Blacklists Released ${tag}" -a
+          git pull --rebase
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
