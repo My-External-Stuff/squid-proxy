@@ -40,10 +40,10 @@ jobs:
         run: |
           echo "I'm done..."
           echo "Please wipe my..."
-          echo -e "\n\n\n\n\n"
+          echo -e "\n\n"
           sleep 1
           echo "....cache"
-          echo "What did you think I ment your pervert :smiley:"
+          echo "What did you think I mend your pervert :smiley:"
 
       - name: Commit changes
         run: |
