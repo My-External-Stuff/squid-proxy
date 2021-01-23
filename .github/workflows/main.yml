@@ -33,7 +33,7 @@ jobs:
 
       - name: Pack the Blacklists
         run: |
-          python3.9 -m zipfile -c "${{ github.workspace }}/blacklists.tar.gz" \
+          python -m zipfile -c "${{ github.workspace }}/blacklists.tar.gz" \
           "${{ github.workspace }}/blacklists/"
 
       - name: Greeting
